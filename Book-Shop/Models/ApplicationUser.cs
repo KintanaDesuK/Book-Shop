@@ -11,7 +11,7 @@ namespace Book_Shop.Models
     public class ApplicationUser : IdentityUser
 
     {
-        [Display(Name = "Sales Person")]
+        [Display(Name = "UserName")]
         public string Name { get; set; }
 
         [NotMapped]
