@@ -11,6 +11,10 @@
 using System;
 using System.Reflection;
 
+<<<<<<< Updated upstream
+=======
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
+>>>>>>> Stashed changes
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-Book_Shop-899EB9C5-2CAD-467C-9952-24C15D4168FF")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Book-Shop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
