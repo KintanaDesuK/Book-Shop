@@ -1,0 +1,69 @@
+﻿@model Book_Shop.Models.ViewModel.BooksViewModel
+@using Book_Shop.Extensions
+
+<br />
+<h2 class="text-info">Book Details</h2>
+
+    <div class="p-4 border rounded row">
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Book.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Book.Name" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Book.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Book.Price" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Book.Available"></label>
+                </div>
+                <div class="col-8">
+                    <input type="checkbox" asp-for="Book.Available" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Book.Author"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Book.Author" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Categories"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Book.Categories.Name" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Publishers"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Book.Publisher.Name" readonly class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-3">
+            <img src="@Model.Book.Image" width="100%" class="img-fluid" />
+        </div>
+        <br />
+        <div class="form-group">
+            <a type="button" class="btn btn-primary" href="@Url.Action("Edit/"+Model.Book.Id).Replace("%2F","/")">Edit</a>
+            <a asp-action="Index" class="btn btn-success">Back to list</a>
+        </div>
+    </div>
