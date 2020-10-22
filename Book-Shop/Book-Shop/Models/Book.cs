@@ -16,11 +16,7 @@ namespace Book_Shop.Models
         public double Price { get; set; }
 
         public bool Available { get; set; }
-
         public string Image { get; set; }
-
-        public string Author { get; set; }
-        public string NXB { get; set; }
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }

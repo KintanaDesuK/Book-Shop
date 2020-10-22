@@ -42,9 +42,6 @@ namespace Book_Shop.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
@@ -55,9 +52,6 @@ namespace Book_Shop.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NXB")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -103,8 +97,8 @@ namespace Book_Shop.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerEmail")
                         .HasColumnType("nvarchar(max)");
@@ -115,7 +109,10 @@ namespace Book_Shop.Data.Migrations
                     b.Property<string>("CustomerPhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalesPersonId")
+                    b.Property<DateTime>("ShopDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("isConfirmed")
@@ -123,7 +120,7 @@ namespace Book_Shop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SalesPersonId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -135,16 +132,10 @@ namespace Book_Shop.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppointmentId")
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -411,20 +402,24 @@ namespace Book_Shop.Data.Migrations
 
             modelBuilder.Entity("Book_Shop.Models.Orders", b =>
                 {
-                    b.HasOne("Book_Shop.Models.ApplicationUser", "SalesPerson")
+                    b.HasOne("Book_Shop.Models.ApplicationUser", "AdminUser")
                         .WithMany()
-                        .HasForeignKey("SalesPersonId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Book_Shop.Models.ProductsSelectedForOrder", b =>
                 {
                     b.HasOne("Book_Shop.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Book_Shop.Models.Orders", "Orders")
                         .WithMany()
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

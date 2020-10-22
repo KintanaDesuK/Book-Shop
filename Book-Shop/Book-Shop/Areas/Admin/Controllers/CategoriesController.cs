@@ -49,13 +49,13 @@ namespace Book_Shop.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var brand = await _db.Categories.FindAsync(id);
-            if (brand == null)
+            var category = await _db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(brand);
+            return View(category);
         }
 
         //POST Edit action Method

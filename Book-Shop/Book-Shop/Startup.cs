@@ -12,6 +12,7 @@ using Book_Shop.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace Book_Shop
 {
@@ -35,6 +36,18 @@ namespace Book_Shop
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +71,7 @@ namespace Book_Shop
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

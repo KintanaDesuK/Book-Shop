@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Book_Shop.Models.Book>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-12">
+        <h2 style="text-align:center"> Category List</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-6">
+            <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> &nbsp; New Category</a>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<div class="container">
+    <table class="table border table-bordered">
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(m => m.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Categories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Publishers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Authors)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Categories.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Publishers.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Authors.Name)
+            </td>
+
+            <td>
+                <partial name="_TableButtonPartial" model="item.Id" />
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+
+
+

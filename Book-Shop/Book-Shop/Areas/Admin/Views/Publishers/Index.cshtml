@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Book_Shop.Models.Publisher>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-12">
+        <h2 style="text-align:center"> Publisher List</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-6">
+            <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> &nbsp; New Publisher</a>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<div class="container">
+    <table class="table border table-bordered">
+        <tr class="table-info">
+            <th>
+                <span>Name</span>
+            </th>
+            <th>
+                <span>Action</span>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    <partial name="_TableButtonPartial" model="item.Id" />
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+

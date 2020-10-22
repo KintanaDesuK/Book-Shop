@@ -1,0 +1,8 @@
+﻿<!DOCTYPE html>
+
+<div class="col-4 col-md4">
+    @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+</div>
+<div class="col-1 col-md-1" style="padding-top:2px">
+    <button asp-area="Customer" asp-controller="Shop" asp-action="Index" type="submit" class="fas fa-search" style="height:33px;width:100%;background-color:orange;"></button>
+</div>

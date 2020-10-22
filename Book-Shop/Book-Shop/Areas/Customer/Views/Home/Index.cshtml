@@ -1,8 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<Book_Shop.Models.Book>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<br />
+<br />
+<div class="container">
+    <div class="row mb-4 mt-2 d-flex justify-content-center">
+        @foreach (var book in Model)
+        {
+            <div class="col-lg-3 border border">
+                <div class="row align-items-center">
+                    <img class="img-thumbnail" src="@book.Image">
+                </div>
+                <div class="row">
+                    <p class="ml-3">@book.Name</p>
+                </div>
+                <div class="row">
+                    <p class="ml-3">@book.Price VND</p>
+                </div>
+                <div class="row">
+                    <a asp-action="Details" asp-controller="Home" class="btn btn-info ml-3 mb-2" asp-route-id="@book.Id"> <i class="fas fa-shopping-cart"></i>View Details</a>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
