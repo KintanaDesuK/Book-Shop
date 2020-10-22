@@ -12,20 +12,22 @@ namespace Book_Shop.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Sales Person")]
-        public string SalesPersonId { get; set; }
+        [Display(Name = "Admin User")]
+        public string UserId { get; set; }
 
-        [ForeignKey("SalesPersonId")]
-        public virtual ApplicationUser SalesPerson { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser AdminUser { get; set; }
 
-        public DateTime AppointmentDate { get; set; }
+        public DateTime ShopDate { get; set; }
 
         [NotMapped]
-        public DateTime AppointmentTime { get; set; }
+        public DateTime ShopTime { get; set; }
 
         public string CustomerName { get; set; }
         public string CustomerPhoneNumber { get; set; }
         public string CustomerEmail { get; set; }
+
+        public string Address { get; set; }
         public bool isConfirmed { get; set; }
     }
 }

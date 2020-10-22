@@ -13,6 +13,7 @@ namespace Book_Shop.Models
     {
         [Display(Name = "UserName")]
         public string Name { get; set; }
+        public string Address { get; set; }
 
         [NotMapped]
         public bool IsSuperAdmin { get; set; }

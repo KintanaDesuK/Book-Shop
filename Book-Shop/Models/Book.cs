@@ -16,16 +16,21 @@ namespace Book_Shop.Models
         public double Price { get; set; }
 
         public bool Available { get; set; }
-
         public string Image { get; set; }
-
-        public string Author { get; set; }
-        public string NXB { get; set; }
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
-
         [ForeignKey("CategoryId")]
         public virtual Category Categories { get; set; }
+
+        [Display(Name = "Publisher")]
+        public int PublisherId { get; set; }
+        [ForeignKey("PublisherId")]
+        public virtual Publisher Publishers { get; set; }
+
+        [Display(Name = "Author")]
+        public int AuthorId { get; set; }
+        [ForeignKey("AuthorId")]
+        public virtual Author Authors { get; set; }
     }
 }

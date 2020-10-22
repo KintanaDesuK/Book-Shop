@@ -1,0 +1,171 @@
+﻿@model Book_Shop.Models.ViewModel.ShopViewModel
+@using Microsoft.AspNetCore.Http;
+@using Book_Shop.Extensions;
+@using Book_Shop.Utility;
+@using Book_Shop.Models.ViewModel;
+@inject IHttpContextAccessor HttpContextAccessor
+
+<form method="get">
+    <div class="cart-bg-overlay"></div>
+    <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2> Book Page </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="shop_grid_area">
+        @{
+            int count = HttpContextAccessor.HttpContext.Session.Get<int>("ssAmount");
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 col-md-4 col-lg-3">
+                        <div class="shop_sidebar_area">
+
+
+                            <!-- ##### Single Widget ##### -->
+                            <div class="widget brands mb-50">
+                                <!-- Widget Title 2 -->
+                                <a asp-action="Index">Tất cả</a>
+                                <p class="widget-title2 mb-30">Category</p>
+                                @{
+                                    foreach (var category in Model.Categories)
+                                    {
+                                        <div class="widget-desc">
+                                            <ul>
+                                                @{
+                                                    //Search theo Brand ID ứng với tên Brand tương ứng
+
+                                                    <li><a asp-action="SearchCategory" asp-route-id="@category.Id">@category.Name</a></li>
+
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+
+                                }
+                                <p class="widget-title2 mb-30">Author</p>
+                                @{
+                                    foreach (var author in Model.Authors)
+                                    {
+                                        <div class="widget-desc">
+                                            <ul>
+                                                @{
+                                                    //Search theo Brand ID ứng với tên Brand tương ứng
+
+                                                    <li><a asp-action="SearchAuthor" asp-route-id="@author.Id">@author.Name</a></li>
+
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+
+                                }
+                                <p class="widget-title2 mb-30">Author</p>
+                                @{
+                                    foreach (var publisher in Model.Publishers)
+                                    {
+                                        <div class="widget-desc">
+                                            <ul>
+                                                @{
+                                                    //Search theo Brand ID ứng với tên Brand tương ứng
+
+                                                    <li><a asp-action="SearchPublisher" asp-route-id="@publisher.Id">@publisher.Name</a></li>
+
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-9 col-md-8 col-lg-9">
+                        <div class="shop_grid_product_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-topbar d-flex align-items-center justify-content-between">
+                                        <!-- số lượng -->
+
+
+                                        <div>@count tìm thấy</div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row mb-4 mt-2 d-flex justify-content-center">
+                                    @foreach (var book in Model.Books)
+                                    {
+                                        <div class="col-lg-3 border border">
+                                            <div class="row align-items-center">
+                                                <img class="img-thumbnail" src="@book.Image">
+                                            </div>
+                                            <div class="row">
+                                                <p class="ml-3">@book.Name</p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="ml-3">@book.Price VND</p>
+                                            </div>
+                                            <div class="row">
+                                                <a asp-action="Details" asp-controller="Home" class="btn btn-info ml-3 mb-2" asp-route-id="@book.Id"> <i class="fas fa-shopping-cart"></i>View Details</a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+</form>
+<div class="container" style="margin-top: 100px;margin-bottom: 100px ">
+    <div class="row">
+        @foreach (var book in Model.Books)
+        {<div style="margin-top:30px">
+
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">
+                            <label style="font-size:23px;color:black">@book.Name</label>
+                        </h4>
+                    </div>
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id">
+                        <img class="card-img-top" style="height:;" src="@book.Image" alt="Card Image" />
+                    </a>
+
+                    <div class="container" style="padding:10px">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="btn-group">
+                                    <label style="font-size:20px; color:#a51313"><b>$@book.Price</b>/VND</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 nav-link">
+                                <a asp-action="Details" asp-controller="Home" asp-route-id="@book.Id">
+                                    View Details
+                                    <i class="fa fa-chevron-right "></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Book_Shop.Models.Author>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminSite.cshtml";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-12">
+        <h2 style="text-align:center"> Author List</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-6">
+            <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> &nbsp; New Author</a>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<div class="container">
+    <table class="table border table-bordered">
+        <tr class="table-info">
+            <th>
+                <span>Name</span>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    <partial name="_TableButtonPartial" model="item.Id" />
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+

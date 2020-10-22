@@ -1,33 +1,68 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using Book_Shop.Extensions
+@using Book_Shop.Utility
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - Book_Shop</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/design/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/design/plugins/fontawesome/css/all.min.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Book_Shop</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="col-lg-5">
+                <img src="~/design/img/book_shop.PNG" class="img-fluid" />
             </div>
+            <div class="col-lg-7 ">
+                <h1 class="text-center mt-4">Fantasic Four</h1>
+                <h3 class="text-center mt-3">Đem thế giới sách đến với mọi người</h3>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <ul class="nav-item">
+                <a class="nav-link text-light h3" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+            </ul>
+           
+            <ul class="nav-item">
+                <a class="nav-link text-light h3" asp-area="Customer" asp-controller="Shop" asp-action="Index">All Shop</a>
+            </ul>
+
+            @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
+            {
+                <ul class="nav-item">
+                    <a class="nav-item text-light" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
+                        <i class="fas fa-shopping-cart"></i>&nbsp;
+                        @{
+                            var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
+                        }
+                        (@count)
+                    </a>
+                </ul>
+            }
+            else
+
+            {
+                <ul class="nav-item">
+                    <a class="nav-item text-light" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
+                        <i class="fas fa-shopping-cart"></i>&nbsp;
+                        (0)
+                    </a>
+                </ul>
+            }
+            <form asp-controller="Shop" asp-action="Index">
+                <p>
+                    Title: <input type="text" name="SearchString">
+                    <input type="submit" value="Filter" />
+                </p>
+            </form>
+            
+            <partial name="_LoginPartial" />
         </nav>
     </header>
     <div class="container">
@@ -35,15 +70,54 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    <footer class="bg-dark p-4">
         <div class="container">
-            &copy; 2020 - Book_Shop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4 class="text-light mb-3">Liên hệ</h4>
+                    <a href="#" class="text-info"><img width="30px" height="30px" src="~/design/img/logo/facebook.PNG"></a>
+                    <a href="#" class="text-info"><img width="30px" height="30px" src="~/design/img/logo/intagram.PNG"></a>
+                    <a href="#" class="text-info"><img width="30px" height="30px" src="~/design/img/logo/zalo.PNG"></a>
+                    <p class="text-light mt-3">Địa chỉ: toà nhà Sài Gòn Tech, Lô 14, Công viên phần mềm Quang Trung</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h4 class="text-light mb-3">Về Fantasic Four</h4>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="mb-3 text-light">Giới thiệu</a>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="mb-3 text-light">Điều khoản dịch vụ</a>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="mb-3 text-light">Hướng dẫn thanh toán</a>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="mb-3 text-light">Phản hồi</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h4 class="text-light mb-3">App đọc sách</h4>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="mb-3 text-light"><img src="~/design/img/logo/app-android.jpg"></a>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="mb-3 text-light"><img src="~/design/img/logo/app-ios.jpg"></a>
+                    </div>
+                </div>
+            </div>
         </div>
+        <h4 class="text-light text-center">Website được thiết kế bởi nhóm Fantasic Four.</h4>
+        <p class="text-light text-center mt-3">Mọi đóng góp xin gữi về email: fantasicfour@gmail.com</p>
+        <p class="text-light text-center">Những đóng gọp của bạn sẽ giúp chúng tôi cải thiện để tốt hơn</p>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="plugins/jquery/jquery-3.5.1.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+

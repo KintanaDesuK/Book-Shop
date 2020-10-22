@@ -1,0 +1,90 @@
+﻿@model Book_Shop.Models.ViewModel.BookViewModel
+@using Book_Shop.Extensions
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminSite.cshtml";
+}
+
+
+<br />
+<h2 style="text-align:center">Create Book</h2>
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div style="margin-top:20px"></div>
+        <div class="p-4 border rounded">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Book.Name">Name</label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Book.Name" class="form-control" />
+                </div>
+                <span asp-validation-for="Book.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Book.Price">Price</label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Book.Price" class="form-control" />
+                </div>
+                <span asp-validation-for="Book.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Book.Available">Available</label>
+                </div>
+                <div class="col-5">
+                    <input type="checkbox" asp-for="Book.Available" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Book.Image">Name</label>
+                </div>
+                <div class="col-5">
+                    <input type="file" name="files" multiple class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Categories">Category</label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="@Model.Book.CategoryId" asp-items="Model.Categories.ToSelectListItem(Model.Book.CategoryId)"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Authors">Author</label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="@Model.Book.AuthorId" asp-items="Model.Authors.ToSelectListItem(Model.Book.AuthorId)"></select>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Publishers">Publisher</label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="@Model.Book.PublisherId" asp-items="Model.Publishers.ToSelectListItem(Model.Book.PublisherId)"></select>
+                </div>
+
+            </div>
+
+            <br />
+            <div class="form-group" style="text-align:center">
+                <input type="submit" class="btn btn-primary" value="Create" />
+                <a asp-action="Index" class="btn btn-success">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
